@@ -18,7 +18,7 @@
 <h5>Example:</h5>
  <p>
  {<br>
-```json
+<pre> <code>
   "horario": [
     {
       "title": "Opening Time,
@@ -58,7 +58,7 @@
     }
       ]
         }
-```
+</code> </pre>
 <p> You can use https://www.epochconverter.com/ as a time converter to date_start and date_end </p>
 
 <p><b>2º</b> Do we have to pay something to use it? </p>
