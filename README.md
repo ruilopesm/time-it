@@ -15,7 +15,7 @@
  <p><b>1º</b> What will we have to do to use your API ?</p>
  <p> You just have to submit a request to API (using fetch or something else) with your schedule and tags in a dictionary and then, ask for your user "tag" preferences so the API will automatic give the Best Schedule he could get according to his preferences.
 <br>
-<h3>Example:</h3>
+<h5>Example:</h5>
  <p>
  {
   "horario": [
