@@ -19,29 +19,29 @@
  <p>
  {<br>
 ```json
-  "horario": [<br>
-    {<br>
-      "title": "Opening Time",<br>
-      "date_start": "1641027600",<br>
-      "date_end": "1641031200",<br>
-      "tags": []<br>
-    },<br>
-    {<br>
-      "title": "Timmy Trumpet",<br>
-      "date_start": "1641031200",<br>
-      "date_end": "1641038400",<br>
+  "horario": [
+    {
+      "title": "Opening Time,
+      "date_start": "1641027600",
+      "date_end": "1641031200",
+      "tags": []
+    },
+    {
+      "title": "Timmy Trumpet",
+      "date_start": "1641031200",
+      "date_end": "1641038400",
       "tags": [<br>
-        "eletronica"<br>
-       ]<br>
-    },<br>
-    {<br>
+        "eletronica"
+       ]
+    },
+    {
       "title": "Metallica",<br>
-      "date_start": "1641031200",<br>
-      "date_end": "1641038400",<br>
-      "tags": [<br>
-        "rock"<br>
-      ]v
-    },<br>
+      "date_start": "1641031200",
+      "date_end": "1641038400",
+      "tags": [
+        "rock"
+      ]
+    },
 `   {
       "title": "Dzrt",
       "date_start": "1641031200",
