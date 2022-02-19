@@ -1,3 +1,4 @@
+import os
 import random
 import json
 
@@ -18,8 +19,19 @@ app.add_middleware(
 
 # POST
 @app.post('/api/create')
-async def create(req: Request) -> list:
-    pass
+async def create(req: Request) -> int:
+    ids = []
+    for file in os.listdir('events/'):
+        id = int(file[:-5])
+        ids.append(id)
+        
+    new_id = max(ids) + 1
+    event = await req.json()
+
+    file = open('events/' + str(new_id) + '.json', 'xt', encoding = 'utf-8')
+    file.write(json.dumps(event))
+
+    return new_id
 
 # GET
 @app.get('/api/{id}/tags')
@@ -33,17 +45,19 @@ async def tags(id: str) -> list:
             tags = set(tags) # Remove duplicates
             return tags
 
-    except FileNotFoundError as e:
-        raise HTTPException(status_code = 404, detail = str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code = 404, detail = "ID not found")
 
 # POST
 @app.post('/api/{id}/schedule')
-async def schedule(req: Request) -> list:
-    data = await req.json()
-
-    schedule = data['schedule']
-    interests = data['interests']
-    tags = interests['tags']
+async def schedule(req: Request, id: str) -> list:
+    try:
+        # Open file
+        with open(f'events/{id}.json') as file:
+            schedule = json.load(file)
+        tags = await req.json()
+    except FileNotFoundError:
+        raise HTTPException(status_code = 404, detail = "ID not found")
 
     to_remove = []
     colided = check_colide(schedule) # Returns a list of tuples containing events happening at the same time
