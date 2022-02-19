@@ -1,7 +1,7 @@
 import random
 import json
 
-from fastapi import Request, FastAPI
+from fastapi import Request, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 # Instantiate FastAPI
@@ -16,8 +16,29 @@ app.add_middleware(
     allow_headers = ["*"]
 )
 
-@app.post('/api/v1/')
-async def root(req: Request) -> list:
+# POST
+@app.post('/api/create')
+async def create(req: Request) -> list:
+    pass
+
+# GET
+@app.get('/api/{id}/tags')
+async def tags(id: str) -> list:
+    try:
+        with open(f'events/{id}.json') as file:
+            data = json.load(file)
+            tags = []
+            for elem in data:
+                tags += elem['tags']
+            tags = set(tags) # Remove duplicates
+            return tags
+
+    except FileNotFoundError as e:
+        raise HTTPException(status_code = 404, detail = str(e))
+
+# POST
+@app.post('/api/{id}/schedule')
+async def schedule(req: Request) -> list:
     data = await req.json()
 
     schedule = data['schedule']
@@ -70,6 +91,7 @@ async def root(req: Request) -> list:
         if elem in schedule:
             schedule.remove(elem)
 
+    # print(check_colide(schedule)) # Testing purposes
     return schedule
         
 # Checks for coliding events inside the main schedule
