@@ -19,7 +19,7 @@ app.add_middleware(
 
 # POST
 @app.post('/api/create')
-async def create(req: Request) -> int:
+async def create(req: Request) -> dict:
     ids = []
     for file in os.listdir('events/'):
         id = int(file[:-5])
@@ -31,7 +31,7 @@ async def create(req: Request) -> int:
     file = open('events/' + str(new_id) + '.json', 'xt', encoding = 'utf-8')
     file.write(json.dumps(event))
 
-    return new_id
+    return {"id": new_id}
 
 # GET
 @app.get('/api/{id}/tags')
