@@ -17,8 +17,8 @@
 <br>
 <h5>Example:</h5>
  <p>
- {<br>
 <pre> <code>
+ {
   "horario": [
     {
       "title": "Opening Time,
