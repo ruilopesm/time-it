@@ -17,7 +17,7 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				horario: [
+				schedule: [
 					{
 						title: 'Abertura',
 						date_start: '1641027600',
@@ -58,7 +58,7 @@
 						title: 'Tuna Académica',
 						date_start: '1641052800',
 						date_end: '1641060000',
-						tags: ['tradicional']
+						tags: ['traditional']
 					},
 					{
 						title: 'Julinho KSD',
@@ -85,7 +85,7 @@
 						tags: ['eletronica']
 					}
 				],
-				interesses: {
+				interests: {
 					tags: {
 						rock: rock,
 						metal: metal,
@@ -93,7 +93,7 @@
 						pop: pop,
 						rap: rap,
 						jazz: jazz,
-						tradicional: tradicional
+						tradicional: traditional
 					}
 				}
 			})
