@@ -2,55 +2,6 @@ from fastapi import Request, FastAPI
 
 app = FastAPI()
 
-"""
-{
-  "horario": [
-    {
-      "title": "Artic Monkeys",
-      "date_start": "30000",
-      "date_end": "100000",
-      "tags": [
-        "vibes"
-      ]
-    },
-    {
-      "title": "Artista523",
-      "date_start": "30000",
-      "date_end": "50000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    },
-    {
-      "title": "Teste12453643",
-      "date_start": "110000",
-      "date_end": "140000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    },
-    {
-      "title": "Lol213457654",
-      "date_start": "160000",
-      "date_end": "170000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    }
-  ],
-  "interesses": {
-    "tags": {
-        "rock": "1",
-        "metal": "5",
-        "vibes": "2"
-      }
-  }
-}
-"""
-
 @app.get('/')
 async def home(request: Request):
     json_data = await request.json()
