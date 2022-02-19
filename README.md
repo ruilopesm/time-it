@@ -1,6 +1,5 @@
-# Hackathon
+# NomeQualquer API
 
-<title> NomeQualquer API </title>
 
 
 <h1><b>API Reference</b></h1>
