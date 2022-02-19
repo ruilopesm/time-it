@@ -6,12 +6,12 @@
 	let pop = 3;
 	let rap = 3;
 	let eletronica = 3;
-	let tradicional = 3;
+	let traditional = 3;
 	let jazz = 3;
 	let metal = 3;
 
 	function submit() {
-		fetch('http://localhost:8000/', {
+		fetch('http://localhost:8000/api/1/schedule', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -93,7 +93,7 @@
 						pop: pop,
 						rap: rap,
 						jazz: jazz,
-						tradicional: traditional
+						traditional: traditional
 					}
 				}
 			})
@@ -137,8 +137,8 @@
 		</div>
 		<div class="tradicional input">
 			<label for="tradicional">Tradicional: </label>
-			<input type="range" id="tradicional" min="0" max="5" step="1" bind:value={tradicional} />
-			<output for="tradicional" id="tradicional-output">{tradicional}</output>
+			<input type="range" id="tradicional" min="0" max="5" step="1" bind:value={traditional} />
+			<output for="tradicional" id="tradicional-output">{traditional}</output>
 
 			<br />
 		</div>
