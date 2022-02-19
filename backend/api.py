@@ -1,55 +1,7 @@
+import random
 from fastapi import Request, FastAPI
 
 app = FastAPI()
-
-"""
-{
-  "horario": [
-    {
-      "title": "Artic Monkeys",
-      "date_start": "30000",
-      "date_end": "100000",
-      "tags": [
-        "vibes"
-      ]
-    },
-    {
-      "title": "Artista523",
-      "date_start": "30000",
-      "date_end": "50000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    },
-    {
-      "title": "Teste12453643",
-      "date_start": "110000",
-      "date_end": "140000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    },
-    {
-      "title": "Lol213457654",
-      "date_start": "160000",
-      "date_end": "170000",
-      "tags": [
-        "rock",
-        "metal"
-      ]
-    }
-  ],
-  "interesses": {
-    "tags": {
-        "rock": "1",
-        "metal": "5",
-        "vibes": "2"
-      }
-  }
-}
-"""
 
 @app.get('/')
 async def home(request: Request):
@@ -72,19 +24,28 @@ async def home(request: Request):
         horario2_numberoftags = 0
 
         for htags in horario1.get('tags', []):
-            horario1_numberoftags += 1
-            horario1_tagssum += int(tags[htags])
+          horario1_numberoftags += 1
+          horario1_tagssum += int(tags[htags])
+
         for htags in horario2.get('tags', []):
-            horario2_numberoftags += 1
-            horario2_tagssum += int(tags[htags])
+          horario2_numberoftags += 1
+          horario2_tagssum += int(tags[htags])
 
-        horario1_tagssum = horario1_tagssum / horario1_numberoftags
-        horario2_tagssum = horario2_tagssum / horario2_numberoftags
+        if (horario1_numberoftags != 0):
+          horario1_tagssum = horario1_tagssum / horario1_numberoftags
+        if (horario2_numberoftags != 0):
+          horario2_tagssum = horario2_tagssum / horario2_numberoftags
 
-        if horario1_tagssum > horario2_tagssum:
+        if horario1_tagssum > horario2_tagssum and (len(horario2.get('tags', [])) > 0):
             horarios_to_remove.append(horario2)
-        else:
+        elif horario1_tagssum < horario2_tagssum and (len(horario1.get('tags', [])) > 0):
              horarios_to_remove.append(horario1)
+        elif horario1_tagssum == horario2_tagssum and (len(horario1.get('tags', [])) > 0) and (len(horario2.get('tags', [])) > 0):
+            #choose random horario and remove it
+            if (random.randint(0,1) == 0):
+                horarios_to_remove.append(horario1)
+            else:
+                horarios_to_remove.append(horario2)
 
     for horario in horarios_to_remove:
       if (horario in horarios):
@@ -94,13 +55,33 @@ async def home(request: Request):
 
 #return tuples of shedules (eventos) happening at the same time
 def colide(shedules):
-    colidiu = []
+    colided_events = []
     for i in range(len(shedules)):
-        for j in range(len(shedules)):
-            if i != j:
-                if colide_horario(shedules[i], shedules[j]):
-                    colidiu.append((i,j))
-    return colidiu
+        for j in range(i+1, len(shedules)):
+            if (colide_horario(shedules[i], shedules[j])):
+                colided_events.append((i,j))
+    return colided_events
+
 
 def colide_horario(horario1, horario2):
-    return horario1['date_start'] <= horario2['date_start'] <= horario1['date_end'] or horario1['date_start'] <= horario2['date_end'] <= horario1['date_end']
+    #verifica se o horario1 é ao mesmo tempo do horario2
+    if (horario1['date_start'] == horario2['date_start'] and horario1['date_end'] == horario2['date_end']):
+        return True
+    
+    #verifica se o horario1 começa antes do horario2 e termina depois dele
+    if (horario1['date_start'] < horario2['date_start'] and horario1['date_end'] > horario2['date_start']):
+        return True
+    
+    #verifica se o horario1 começa depois do horario2 e termina antes dele
+    if (horario1['date_start'] > horario2['date_start'] and horario1['date_end'] < horario2['date_end']):
+        return True
+
+    #verifica se o horario1 começa antes do horario2 e termina depois dele
+    if (horario1['date_start'] < horario2['date_start'] and horario1['date_end'] > horario2['date_end']):
+        return True
+
+    #verifica se o horario1 começa depois do horario2 e termina antes dele
+    if (horario1['date_start'] > horario2['date_start'] and horario1['date_end'] < horario2['date_end']):
+        return True
+
+    return False
