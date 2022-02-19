@@ -1,5 +1,5 @@
 {
-  "horario": [
+  "schedule": [
     {
       "title": "Abertura",
       "date_start": "1641027600",
@@ -22,7 +22,7 @@
         "rock"
       ]
     },
-`   {
+    {
       "title": "Dzrt",
       "date_start": "1641031200",
       "date_end": "1641038400",
@@ -40,7 +40,9 @@
       "title": "João das Neves",
       "date_start": "1641038400",
       "date_end": "1641045600",
-      "tags": [ "pop" ]
+      "tags": [
+        "pop" 
+      ]
     },
     {
       "title": "Marshmello",
@@ -97,17 +99,17 @@
       "tags": [
         "eletronica"
        ]
-    },
+    }
   ],
- "interesses": {
+ "interests": {
     "tags": {
         "rock": 1,
         "metal": 5,
         "eletronica": 2,
         "pop" : 0,
-	  "jazz" : 0,
+	      "jazz" : 0,
         "tradicional": 2,
-        "rap": 2,
+        "rap": 2
       }
   }
 }

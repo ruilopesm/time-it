@@ -1,101 +1,105 @@
 import random
-from fastapi import Request, FastAPI
+import json
 
+from fastapi import Request, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# Instantiate FastAPI
 app = FastAPI()
 
-origins = [
-    "*",
-]
-
+# Whitelist
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins = ["*"],
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"]
 )
 
-@app.post('/')
-async def home(request: Request):
-    json_data = await request.json()
+@app.post('/api/v1/')
+async def root(req: Request) -> list:
+    data = await req.json()
 
-    horarios = json_data['horario']
-    interesses = json_data['interesses']
-    tags = interesses['tags']
-    
-    horarios_to_remove = []
-    colided_events = colide(horarios) # retorna uma lista de tuplos de eventos que coincidem no horario
+    schedule = data['schedule']
+    interests = data['interests']
+    tags = interests['tags']
 
-    for event in colided_events:
-        horario1 = horarios[event[0]]
-        horario1_tagssum = 0
-        horario1_numberoftags = 0
+    to_remove = []
+    colided = check_colide(schedule) # Returns a list of tuples containing events happening at the same time
 
-        horario2 = horarios[event[1]]
-        horario2_tagssum = 0
-        horario2_numberoftags = 0
+    for event in colided:
+        h1 = schedule[event[0]]
+        h1_sum = 0
+        h1_tags = 0
 
-        for htags in horario1.get('tags', []):
-          horario1_numberoftags += 1
-          horario1_tagssum += int(tags[htags])
+        h2 = schedule[event[1]]
+        h2_sum = 0
+        h2_tags = 0
 
-        for htags in horario2.get('tags', []):
-          horario2_numberoftags += 1
-          horario2_tagssum += int(tags[htags])
+        for tag in h1.get('tags', []):
+            h1_tags += 1
+            h1_sum += int(tags[tag])
+            
+        for tag in h2.get('tags', []):
+            h2_tags += 1
+            h2_sum += int(tags[tag])
 
-        if (horario1_numberoftags != 0):
-          horario1_tagssum = horario1_tagssum / horario1_numberoftags
-        if (horario2_numberoftags != 0):
-          horario2_tagssum = horario2_tagssum / horario2_numberoftags
+        if h1_tags != 0:
+            h1_sum = h1_sum / h1_tags
+        
+        if h2_tags != 0:
+            h2_sum = h2_sum / h2_tags
+        
+        h1_len = len(h1.get('tags', []))
+        h2_len = len(h2.get('tags', []))
+        
+        if (h1_sum > h2_sum) and (h2_len > 0):
+            to_remove.append(h2)
 
-        if horario1_tagssum > horario2_tagssum and (len(horario2.get('tags', [])) > 0):
-            horarios_to_remove.append(horario2)
-        elif horario1_tagssum < horario2_tagssum and (len(horario1.get('tags', [])) > 0):
-             horarios_to_remove.append(horario1)
-        elif horario1_tagssum == horario2_tagssum and (len(horario1.get('tags', [])) > 0) and (len(horario2.get('tags', [])) > 0):
-            #choose random horario and remove it
-            if (random.randint(0,1) == 0):
-                horarios_to_remove.append(horario1)
+        elif (h1_sum < h2_sum) and (h1_len > 0):
+            to_remove.append(h1)
+        
+        elif (h1_sum == h2_sum) and (h1_len > 0) and (h2_len > 0):
+            # Chooses a random schedule and remove it
+            if (random.randint(0,1)) == 0:
+                to_remove.append(h1)
             else:
-                horarios_to_remove.append(horario2)
+                to_remove.append(h2)
 
-    for horario in horarios_to_remove:
-      if (horario in horarios):
-        horarios.remove(horario)
+    for elem in to_remove:
+        if elem in schedule:
+            schedule.remove(elem)
 
-    return horarios
+    return schedule
+        
+# Checks for coliding events inside the main schedule
+def check_colide(schedule: list) -> list:
+    colided = []
+    for i in range(len(schedule)):
+        for j in range(i + 1, len(schedule)):
+            if (check_colide_aux(schedule[i], schedule[j])):
+                colided.append((i,j))
+    return colided
 
-#return tuples of shedules (eventos) happening at the same time
-def colide(shedules):
-    colided_events = []
-    for i in range(len(shedules)):
-        for j in range(i+1, len(shedules)):
-            if (colide_horario(shedules[i], shedules[j])):
-                colided_events.append((i,j))
-    return colided_events
+def check_colide_aux(h1, h2) -> bool:
+    start1 = h1['date_start']
+    end1 = h1['date_end']
+    start2 = h2['date_start']
+    end2 = h2['date_end']
 
-
-def colide_horario(horario1, horario2):
-    #verifica se o horario1 é ao mesmo tempo do horario2
-    if (horario1['date_start'] == horario2['date_start'] and horario1['date_end'] == horario2['date_end']):
+    if start1 == start2 and end1 == end2:
         return True
     
-    #verifica se o horario1 começa antes do horario2 e termina depois dele
-    if (horario1['date_start'] < horario2['date_start'] and horario1['date_end'] > horario2['date_start']):
+    if start1 < start2 and end1 > start2:
+        return True
+
+    if start1 > start2 and end1 < end2:
+        return True 
+    
+    if start1 < start2 and end1 > start2:
         return True
     
-    #verifica se o horario1 começa depois do horario2 e termina antes dele
-    if (horario1['date_start'] > horario2['date_start'] and horario1['date_end'] < horario2['date_end']):
-        return True
-
-    #verifica se o horario1 começa antes do horario2 e termina depois dele
-    if (horario1['date_start'] < horario2['date_start'] and horario1['date_end'] > horario2['date_end']):
-        return True
-
-    #verifica se o horario1 começa depois do horario2 e termina antes dele
-    if (horario1['date_start'] > horario2['date_start'] and horario1['date_end'] < horario2['date_end']):
+    if start1 > start2 and end1 < end2:
         return True
 
     return False
