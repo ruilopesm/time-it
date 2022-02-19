@@ -21,6 +21,7 @@
   },
   "type": "module",
   "dependencies": {
-    "svelte-modals": "^1.1.0"
+    "svelte-modals": "^1.1.0",
+    "svelty-picker": "^1.2.4"
   }
 }
