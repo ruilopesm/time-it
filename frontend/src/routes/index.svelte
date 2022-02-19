@@ -1,5 +1,5 @@
 <script>
-	import Music from './forms/musica.svelte';
+	import Music from './forms/musicForm.svelte';
 	let visibleForm = Music;
 </script>
 

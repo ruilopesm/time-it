@@ -8,8 +8,8 @@
 </Modals>
 
 <section class="title">
-	<h1>Questionário</h1>
-	<h2>Seleciona de 0 a 5 consoante as suas preferências:</h2>
+	<h1>Form</h1>
+	<h2>Select from 0 to 5 according to your preferences:</h2>
 </section>
 
 <main>

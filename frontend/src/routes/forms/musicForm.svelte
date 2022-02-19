@@ -5,7 +5,7 @@
 	let rock = 3;
 	let pop = 3;
 	let rap = 3;
-	let eletronica = 3;
+	let eletronic = 3;
 	let traditional = 3;
 	let jazz = 3;
 	let metal = 3;
@@ -19,7 +19,7 @@
 			body: JSON.stringify({
 				schedule: [
 					{
-						title: 'Abertura',
+						title: 'Opening',
 						date_start: '1641027600',
 						date_end: '1641031200',
 						tags: []
@@ -28,7 +28,7 @@
 						title: 'Timmy Trumpet',
 						date_start: '1641031200',
 						date_end: '1641038400',
-						tags: ['eletronica']
+						tags: ['eletronic']
 					},
 					{
 						title: 'Metallica',
@@ -37,7 +37,7 @@
 						tags: ['rock']
 					},
 					{
-						title: 'Almoço',
+						title: 'Lunch',
 						date_start: '1641038400',
 						date_end: '1641045600',
 						tags: []
@@ -46,7 +46,7 @@
 						title: 'Marshmello',
 						date_start: '1641045600',
 						date_end: '1641052800',
-						tags: ['eletronica']
+						tags: ['eletronic']
 					},
 					{
 						title: 'Profjam',
@@ -82,14 +82,14 @@
 						title: 'Artic Monkeys',
 						date_start: '1641067200',
 						date_end: '1641074400',
-						tags: ['eletronica']
+						tags: ['eletronic']
 					}
 				],
 				interests: {
 					tags: {
 						rock: rock,
 						metal: metal,
-						eletronica: eletronica,
+						eletronic: eletronic,
 						pop: pop,
 						rap: rap,
 						jazz: jazz,
@@ -99,7 +99,7 @@
 			})
 		}).then((responseToJson) => {
 			responseToJson.json().then((data) => {
-				openModal(Modal, { title: 'Horário', data: data });
+				openModal(Modal, { title: 'Schedule', data: data });
 			});
 		});
 	}
@@ -128,15 +128,15 @@
 
 			<br />
 		</div>
-		<div class="eletronica input">
-			<label for="eletronica">Eletrónica: </label>
-			<input type="range" id="eletronica" min="0" max="5" step="1" bind:value={eletronica} />
-			<output for="eletronica" id="eletronica-output">{eletronica}</output>
+		<div class="eletronic input">
+			<label for="eletronic">Eletronic: </label>
+			<input type="range" id="eletronic" min="0" max="5" step="1" bind:value={eletronic} />
+			<output for="eletronic" id="eletronic-output">{eletronic}</output>
 
 			<br />
 		</div>
 		<div class="tradicional input">
-			<label for="tradicional">Tradicional: </label>
+			<label for="tradicional">Traditional: </label>
 			<input type="range" id="tradicional" min="0" max="5" step="1" bind:value={traditional} />
 			<output for="tradicional" id="tradicional-output">{traditional}</output>
 
@@ -156,7 +156,7 @@
 		</div>
 		<br />
 	</div>
-	<input type="submit" value="Criar horário" class="btn btn-primary" />
+	<input type="submit" value="Create shedule" class="btn btn-primary" />
 </form>
 
 <style>
