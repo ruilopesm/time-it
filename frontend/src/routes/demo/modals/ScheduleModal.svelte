@@ -3,14 +3,14 @@
 
 	export let isOpen;
 
-	export let title;
 	export let data;
+	console.log(data);
 </script>
 
 {#if isOpen}
 	<div role="dialog" class="modal">
 		<div class="contents">
-			<h1>{title}</h1>
+			<h1>Schedule</h1>
 			{#each data as { title, date_start, date_end }}
 				<h3>{title}</h3>
 				<h6>{new Date(parseInt(date_start) * 1000).toLocaleString('en-GB')}</h6>
