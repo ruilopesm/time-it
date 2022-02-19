@@ -17,30 +17,31 @@
 <br>
 <h5>Example:</h5>
  <p>
- {
-  "horario": [
-    {
-      "title": "Opening Time",
-      "date_start": "1641027600",
-      "date_end": "1641031200",
-      "tags": []
-    },
-    {
-      "title": "Timmy Trumpet",
-      "date_start": "1641031200",
-      "date_end": "1641038400",
-      "tags": [
-        "eletronica"
-       ]
-    },
-    {
-      "title": "Metallica",
-      "date_start": "1641031200",
-      "date_end": "1641038400",
-      "tags": [
-        "rock"
-      ]
-    },
+ {<br>
+```json
+  "horario": [<br>
+    {<br>
+      "title": "Opening Time",<br>
+      "date_start": "1641027600",<br>
+      "date_end": "1641031200",<br>
+      "tags": []<br>
+    },<br>
+    {<br>
+      "title": "Timmy Trumpet",<br>
+      "date_start": "1641031200",<br>
+      "date_end": "1641038400",<br>
+      "tags": [<br>
+        "eletronica"<br>
+       ]<br>
+    },<br>
+    {<br>
+      "title": "Metallica",<br>
+      "date_start": "1641031200",<br>
+      "date_end": "1641038400",<br>
+      "tags": [<br>
+        "rock"<br>
+      ]v
+    },<br>
 `   {
       "title": "Dzrt",
       "date_start": "1641031200",
@@ -57,6 +58,7 @@
     }
       ]
         }
+```
 <p> You can use https://www.epochconverter.com/ as a time converter to date_start and date_end </p>
 
 <p><b>2º</b> Do we have to pay something to use it? </p>
