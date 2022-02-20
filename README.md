@@ -19,7 +19,6 @@
 - An event ID is created and the tags for that event are stored;
 - When a user wants to fill out the form, the API sends the tags back to the website;
 - The user answers the form accorting to their preferences;
-- The user answers the form according to their preferences;
 - The form asnwers are converted to JSON and sent back to the API to calculate the best schedule.
 
 ### Technologies used:
