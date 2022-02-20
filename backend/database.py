@@ -6,7 +6,7 @@ import dotenv
 dotenv.load_dotenv()
 vars = dotenv.dotenv_values('.env')
 
-client = MongoClient(vars["MONGODB_URI"])
+client = MongoClient(vars["MONGODB_URL"])
 db = client["time_it"]
 collection = db["schedules"]
 

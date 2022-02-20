@@ -1,10 +1,11 @@
-[
+
+  [
     {
       "title": "Abertura",
       "date_start": "1641027600",
       "date_end": "1641031200",
       "tags": [
-        
+      
       ]
     },
     {
@@ -12,7 +13,7 @@
       "date_start": "1641031200",
       "date_end": "1641038400",
       "tags": [
-        "eletronica"
+        "eletronic"
         ]
     },
     {
@@ -28,7 +29,8 @@
       "date_start": "1641031200",
       "date_end": "1641038400",
       "tags": [
-        "pop"
+        "pop",
+        "rock"
       ]
     },
     {
@@ -52,7 +54,7 @@
       "date_start": "1641045600",
       "date_end": "1641052800",
       "tags": [
-        "eletronica"
+        "eletronic"
         ]
     },
     {
@@ -68,7 +70,7 @@
       "date_start": "1641052800",
       "date_end": "1641060000",
       "tags": [
-        "tradicional"
+        "traditional"
         ]
     },
       {
@@ -93,14 +95,6 @@
       "date_end": "1641067200",
       "tags": [
         "pop"
-        ]
-    },
-    {
-      "title": "Artic Monkeys",
-      "date_start": "1641067200",
-      "date_end": "1641074400",
-      "tags": [
-        "eletronica"
         ]
     }
 ]

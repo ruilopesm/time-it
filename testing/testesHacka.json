@@ -1,0 +1,113 @@
+{
+  "schedule": [
+    {
+      "title": "Abertura",
+      "date_start": "1641027600",
+      "date_end": "1641031200",
+      "tags": []
+    },
+    {
+      "title": "Timmy Trumpet",
+      "date_start": "1641031200",
+      "date_end": "1641038400",
+      "tags": [
+        "eletronica"
+       ]
+    },
+    {
+      "title": "Metallica",
+      "date_start": "1641031200",
+      "date_end": "1641038400",
+      "tags": [
+        "rock"
+      ]
+    },
+    {
+      "title": "Dzrt",
+      "date_start": "1641031200",
+      "date_end": "1641038400",
+      "tags": [
+        "pop"
+      ]
+    },
+    {
+      "title": "Almoço",
+      "date_start": "1641038400",
+      "date_end": "1641045600",
+      "tags": []
+    },
+    {
+      "title": "João das Neves",
+      "date_start": "1641038400",
+      "date_end": "1641045600",
+      "tags": [ "pop" ]
+    },
+    {
+      "title": "Marshmello",
+      "date_start": "1641045600",
+      "date_end": "1641052800",
+      "tags": [
+        "eletronica"
+       ]
+    },
+    {
+      "title": "Profjam",
+      "date_start": "1641045600",
+      "date_end": "1641052800",
+      "tags": [
+        "rap"
+       ]
+    },
+    {
+      "title": "Tuna Académica",
+      "date_start": "1641052800",
+      "date_end": "1641060000",
+      "tags": [
+        "tradicional"
+       ]
+    },
+     {
+      "title": "Julinho KSD",
+      "date_start": "1641052800",
+      "date_end": "1641060000",
+      "tags": [
+        "rap"
+       ]
+    },
+    {
+      "title": "JMF",
+      "date_start": "1641060000",
+      "date_end": "1641067200",
+      "tags": [
+        "jazz"
+       ]
+    },
+    {
+      "title": "Miguel G",
+      "date_start": "1641060000",
+      "date_end": "1641067200",
+      "tags": [
+        "pop"
+       ]
+    },
+    {
+      "title": "Artic Monkeys",
+      "date_start": "1641067200",
+      "date_end": "1641074400",
+      "tags": [
+        "eletronica"
+       ]
+    }
+  ],
+ "interests": {
+    "tags": {
+        "rock": 1,
+        "metal": 5,
+        "eletronica": 0,
+        "pop" : 2,
+        "jazz" : 0,
+        "tradicional": 2,
+        "rap": 2
+      }
+  }
+}
