@@ -1,14 +1,15 @@
-import os
 import random
-import json
+import database
 
-from fastapi import Request, FastAPI, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+
+import uvicorn
 
 # Instantiate FastAPI
 app = FastAPI()
 
-# Whitelist
+# Whitelist origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins = ["*"],
@@ -18,57 +19,39 @@ app.add_middleware(
 )
 
 # POST
-@app.post('/api/create')
+@app.post('/api/create', response_description = "Add new schedule")
 async def create(req: Request) -> dict:
-    ids = []
-    for file in os.listdir('events/'):
-        id = int(file[:-5])
-        ids.append(id)
-        
-    new_id = max(ids) + 1
-    event = await req.json()
-
-    file = open('events/' + str(new_id) + '.json', 'xt', encoding = 'utf-8')
-    file.write(json.dumps(event))
-
-    return {"id": new_id}
+    json = await req.json()
+    id = database.add_schedule(json)
+    return {"id": id}
 
 # GET
-@app.get('/api/{id}/tags')
+@app.get('/api/{id}/tags', response_description = "Get tags associated with given id")
 async def tags(id: str) -> list:
-    try:
-        with open(f'events/{id}.json') as file:
-            data = json.load(file)
-            tags = []
-            for elem in data:
-                tags += elem['tags']
-            tags = set(tags) # Remove duplicates
-            return tags
+    data = database.get_schedule(id)
 
-    except FileNotFoundError:
-        raise HTTPException(status_code = 404, detail = "ID not found")
+    tags = []
+    for elem in data:
+        tags += elem['tags']
+    tags = set(tags) # Remove duplicates
+    return tags
 
 # POST
-@app.post('/api/{id}/schedule')
+@app.post('/api/{id}/schedule', response_description = "Get best schedule associated with given id and user chosen tags")
 async def schedule(req: Request, id: str) -> list:
-    try:
-        # Open file
-        with open(f'events/{id}.json') as file:
-            schedule = json.load(file)
-        tags = await req.json()
-    except FileNotFoundError:
-        raise HTTPException(status_code = 404, detail = "ID not found")
+    schedule = database.get_schedule(id)
+    tags = await req.json()
 
     to_remove = []
     colided = check_colide(schedule) # Returns a list of tuples containing events happening at the same time
 
     for event in colided:
         h1 = schedule[event[0]]
-        h1_sum = 0
+        h1_sum = 0.0
         h1_tags = 0
 
         h2 = schedule[event[1]]
-        h2_sum = 0
+        h2_sum = 0.0
         h2_tags = 0
 
         for tag in h1.get('tags', []):
@@ -81,9 +64,16 @@ async def schedule(req: Request, id: str) -> list:
 
         if h1_tags != 0:
             h1_sum = h1_sum / h1_tags
+            if h1_sum == 0:
+                to_remove.append(h1)
         
         if h2_tags != 0:
             h2_sum = h2_sum / h2_tags
+            if h2_sum == 0:
+                to_remove.append(h2)
+
+        print(h1_sum)
+        print(h2_sum)
         
         h1_len = len(h1.get('tags', []))
         h2_len = len(h2.get('tags', []))
@@ -105,7 +95,6 @@ async def schedule(req: Request, id: str) -> list:
         if elem in schedule:
             schedule.remove(elem)
 
-    # print(check_colide(schedule)) # Testing purposes
     return schedule
         
 # Checks for coliding events inside the main schedule
@@ -139,3 +128,6 @@ def check_colide_aux(h1, h2) -> bool:
         return True
 
     return False
+
+if __name__ == "__main__":
+    uvicorn.run("api:app", host = "0.0.0.0", port = 8000, reload = True)
