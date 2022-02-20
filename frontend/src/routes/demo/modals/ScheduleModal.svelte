@@ -13,8 +13,8 @@
 			<h1>Schedule</h1>
 			{#each data as { title, date_start, date_end }}
 				<h3>{title}</h3>
-				<h6>{new Date(parseInt(date_start) * 1000).toLocaleString('en-GB')}</h6>
-				<h6>{new Date(parseInt(date_end) * 1000).toLocaleString('en-GB')}</h6>
+				<h6>{new Date(parseInt(date_start)).toLocaleString('en-GB')}</h6>
+				<h6>{new Date(parseInt(date_end)).toLocaleString('en-GB')}</h6>
 			{/each}
 			<div class="actions">
 				<button class="btn-close" on:click={closeModal} />
