@@ -71,9 +71,6 @@ async def schedule(req: Request, id: str) -> list:
             h2_sum = h2_sum / h2_tags
             if h2_sum == 0:
                 to_remove.append(h2)
-
-        print(h1_sum)
-        print(h2_sum)
         
         h1_len = len(h1.get('tags', []))
         h2_len = len(h2.get('tags', []))
