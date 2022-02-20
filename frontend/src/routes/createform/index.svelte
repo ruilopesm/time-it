@@ -66,9 +66,9 @@
 	<h1 class="title">Your events:</h1>
 {/if}
 
-{#each events as { local_id, name, date_start, date_end, tags } (local_id)}
+{#each events as { local_id, title, date_start, date_end, tags } (local_id)}
 	<div class="event">
-		<h1>{local_id + 1}# {name}</h1>
+		<h1>{local_id + 1}# {title}</h1>
 		<p>Date: (start-end): {date_start} - {date_end}</p>
 		<p>Tags: {tags}</p>
 	</div>

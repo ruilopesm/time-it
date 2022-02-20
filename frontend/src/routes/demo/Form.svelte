@@ -1,5 +1,5 @@
 <script>
-	import Modal from 'src/routes/demo/modals/ScheduleModal.svelte';
+	import Modal from './modals/ScheduleModal.svelte';
 	import { openModal } from 'svelte-modals';
 
 	let tags = [];
@@ -60,10 +60,19 @@
 					max="5"
 					step="1"
 					value="3"
+					list="tickmarks"
 					on:input={(event) => {
 						schedule[tag] = parseInt(event.target.value) === undefined ? 3 : parseInt(event.target.value);
 					}}
 				/>
+				<datalist id="tickmarks">
+					<option value="0" />
+					<option value="1" />
+					<option value="2" />
+					<option value="3" />
+					<option value="4" />
+					<option value="5" />
+				</datalist>
 				<output for={tag} id="{tag}-output">{schedule[tag]}</output>
 				<br />
 			</div>

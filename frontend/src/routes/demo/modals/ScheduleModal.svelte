@@ -34,6 +34,8 @@
 		justify-content: center;
 		align-items: center;
 		pointer-events: none;
+		width: 60%;
+		margin: auto;
 	}
 
 	.contents {
@@ -57,6 +59,6 @@
 
 	.actions {
 		position: absolute;
-		right: 12%;
+		right: 3%;
 	}
 </style>
