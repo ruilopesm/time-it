@@ -5,8 +5,8 @@
 <div role="dialog" class="modal">
 	<div class="contents">
 		<h1>Your schedule ID is: {id}</h1>
-		<h4>Access the API with http://127.0.0.1:8000/api/{id}/schedule</h4>
-		<h5>Read more at our <a href="https://github.com/RuiL1904/Hackathon">GitHub</a></h5>
+		<h6>Access the API with http://127.0.0.1:8000/api/{id}/schedule</h6>
+		<h7>Read more at our <a href="https://github.com/RuiL1904/Hackathon">GitHub</a></h7>
 	</div>
 </div>
 
