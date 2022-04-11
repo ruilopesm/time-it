@@ -3,6 +3,9 @@
 # TimeIt - Making event-going simple
 </br>
 
+## Disclaimer:
+This project was developed during an Hackathon in which we placed **second** 🏆.
+
 ### Problem:
 - Events have a lot of simultaneous performances;
 - It's hard and time consuming to choose what to go to;
